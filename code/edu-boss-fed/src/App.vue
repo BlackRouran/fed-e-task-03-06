@@ -1,8 +1,25 @@
 <template>
   <div id="app">
-    <p>哈哈哈哈哈</p>
     <router-view/>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<script lang="ts">
+import Vue from 'vue'
+import request from '@/utils/request'
+
+request({
+  method: 'GET',
+  url: '/boss/v2/api-docs?group=edu-boss-boot'
+})
+
+export default Vue.extend({
+  name: 'App'
+})
+</script>
+
+<style lang="scss" scoped>
+.text {
+  color: $success-color;
+}
+</style>
