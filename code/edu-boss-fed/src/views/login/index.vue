@@ -50,10 +50,11 @@ export default Vue.extend({
           return this.$message.error(data.message)
         } else {
           this.$store.commit('updateUser', data.content)
+          this.$router.push(this.$route.query.redirect as string || '/')
           // 如果成功跳转首页
-          this.$router.push({
-            name: 'home'
-          })
+          // this.$router.push({
+          //   name: 'home'
+          // })
           this.$message.success('登录成功')
         }
       } catch (err) {

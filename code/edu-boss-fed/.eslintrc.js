@@ -23,6 +23,7 @@ module.exports = {
         'requireLast': false
       }
     }],
-    '@typescript-eslint/no-explicit-any': ["error", { "ignoreRestArgs": true }]
+    '@typescript-eslint/no-explicit-any': ["off"],
+    '@typescript-eslint/camelcase': ["off"]
   }
 }

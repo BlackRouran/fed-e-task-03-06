@@ -8,12 +8,12 @@
     </el-breadcrumb>
     <el-dropdown>
       <span class="el-dropdown-link">
-        <el-avatar   src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
+        <el-avatar   :src="userInfo.portrait || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"></el-avatar>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>用户ID</el-dropdown-item>
-        <el-dropdown-item divided>退出</el-dropdown-item>
+        <el-dropdown-item>{{ userInfo.userName }}</el-dropdown-item>
+        <el-dropdown-item divided @click.native="handleLogout">退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -21,9 +21,31 @@
 
 <script lang='ts'>
 import Vue from 'vue'
-
+import { getUserInfo } from '@/api/user.ts'
 export default Vue.extend({
-  name: 'AppHeader'
+  name: 'AppHeader',
+  data () {
+    return {
+      userInfo: {}
+    }
+  },
+  created () {
+    this.getUserInfo()
+    this.getUserInfo()
+  },
+  methods: {
+    async getUserInfo () {
+      const { data } = await getUserInfo()
+      this.userInfo = data.content
+      // console.log(data)
+    },
+    handleLogout () {
+      this.$store.commit('updateUser', null)
+      this.$router.push({
+        path: '/login'
+      })
+    }
+  }
 })
 </script>
 

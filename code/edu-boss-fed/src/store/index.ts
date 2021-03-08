@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { localStorageSet } from '@/utils/utils.ts'
+import { localStorageSet, localStorageGet } from '@/utils/utils.ts'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: null
+    user: JSON.parse(localStorageGet('user') || null)
   },
   mutations: {
     updateUser (state, payload) {
